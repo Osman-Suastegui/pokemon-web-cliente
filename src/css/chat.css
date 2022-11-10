@@ -1,0 +1,38 @@
+
+.Contenedor-chat
+{   
+    border-radius: 10px;
+    flex-direction: column;
+    width: 50vw;
+    height: 50vh;
+    margin: 0 auto;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    padding: 10px;
+    overflow: auto;
+}
+
+.boton-chat
+{ 
+ 
+    background-color: #00BFFF;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    
+}
+.mi-chat
+{
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 10px;
+    padding: 50px;
+    margin: 10px;
+}
+
+.formulario-chat
+{  
+    
+
+
+    
+}

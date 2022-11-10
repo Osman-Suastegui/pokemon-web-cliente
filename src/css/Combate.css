@@ -1,0 +1,80 @@
+
+.Contenedor-Combate{
+    background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/26e9b446-eda5-41f1-9838-b06a36fee8f0/d4rbxni-d2515ef4-2f32-499e-af87-92c2040af945.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI2ZTliNDQ2LWVkYTUtNDFmMS05ODM4LWIwNmEzNmZlZThmMFwvZDRyYnhuaS1kMjUxNWVmNC0yZjMyLTQ5OWUtYWY4Ny05MmMyMDQwYWY5NDUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.gmNK4GLZ40yH_0bn4MmUuDMYpsYQ5JkCNQWiZ_nZgYI);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.Contenedor-Combate img{
+    width:150px;
+    height:150px;
+}   
+.Contenedor-Info{
+    position: fixed;
+}
+.Jugador1{
+    position: absolute;
+    top: 5em;
+    animation: aparecerizquierda 2s;
+}
+
+.Jugador2{
+    position: absolute;
+    top: 25rem;
+    right: 0;
+    animation: aparecerderecha 2s;
+}
+
+.Habilidades{
+    position: absolute;
+    top: 35rem;
+    right: 0;
+    animation: burbuja 2s;
+}
+
+.Habilidades Button{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: white;
+    margin: 2em;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Pokemons {
+    position: absolute;
+    right: 0; 
+    animation: burbuja 2s;
+}
+
+@keyframes aparecerizquierda{
+    0%{
+        left: -100%;
+    }
+
+    100%{
+        left: 0;    
+    }
+}
+@keyframes aparecerderecha{
+    0%{
+        right: 150%;
+    }
+    100%{
+        right: 0;
+    }
+}
+
+@keyframes burbuja{
+    0%{
+        transform: scale(0);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+}

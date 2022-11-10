@@ -1,0 +1,33 @@
+
+
+.card-pokemonPres{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 35px;
+    padding-left: 60%;
+    padding-right: 60%;
+    padding-top: 20px;
+}
+.card-pokemonPres  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 35%;
+    border: 2px solid rgba(121, 40, 40, 0.404);
+    box-shadow: 0 0 10px #000;
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: #fff;
+    
+}
+
+.card-pokemonPres h2 {
+    font-size: 23px;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 0 10px #000;
+
+}
+

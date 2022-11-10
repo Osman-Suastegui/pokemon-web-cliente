@@ -1,0 +1,12 @@
+.InfoJugador {
+    background-color: rgb(182, 161, 161);
+    width: 15rem;
+    height: 5rem;
+}
+
+.BarraVida{
+    background-color: green;
+    border-radius: 20%;
+    height: 1rem;
+    margin : 0.5rem;    
+}

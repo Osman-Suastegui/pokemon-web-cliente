@@ -1,0 +1,11 @@
+.Contenedor-Batalla
+{
+    background-image: url(../img/IndexBackground.jfif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    padding-top: 10px;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}

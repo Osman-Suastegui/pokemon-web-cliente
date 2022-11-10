@@ -1,0 +1,98 @@
+@keyframes flotar {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(0, 0.5em);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes rotarDerecha {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotarIzaquierda {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes temblar{
+    0%{
+        transform: translate(0, 0);
+    }
+    50%{
+        transform: translate(0.5em, 0.5em);
+    }
+    100%{
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes encoger{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(0.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes arcoiris{
+    0%{
+        color: red;
+    }
+    25%{
+        color: orange;
+    }
+    50%{
+        color: yellow;
+    }
+    75%{
+        color: green;
+    }
+    100%{
+        color: blue;
+    }
+}
+
+@keyframes encoger
+{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(0.5);
+    }
+    100%{
+        transform: scale(0.3    );
+        transform: translate(0, 10px);
+    }
+}
+
+@keyframes fuego{
+    0%{ 
+        background-image: url("https://www.gifsanimados.org/data/media/90/fuego-imagen-animada-0112.gif");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    100%{
+        background-image: url("https://www.gifsanimados.org/data/media/90/fuego-imagen-animada-0112.gif");
+        background-size: 100% 100%;
+    }
+}
+
