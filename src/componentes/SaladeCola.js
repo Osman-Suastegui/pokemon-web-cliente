@@ -4,7 +4,7 @@ import '../css/SaladeCola.css'
 
 
 import BatallaMulti from './BatallaMulti.js';
-const socket = io("http://localhost:3000");
+const socket = io("https://api-pokemon-tnt.azurewebsites.net");
 
 function SaladeCola() {
     const [sala,setSalaDeBatalla] = useState()

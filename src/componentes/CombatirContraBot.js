@@ -17,7 +17,7 @@ function CombatirBot() {
   const navigate = useNavigate()
 
   const obtenerEquipoBot = async () => {
-    await fetch("http://localhost:3000/obtenerPokemones")
+    await fetch("https://api-pokemon-tnt.azurewebsites.net/obtenerPokemones")
       .then(data => data.json())
       .then(pokemones => {
         generarEquipoBot(pokemones.map(pokemon => new Pokemon(pokemon.pokemonID,pokemon.nombre, pokemon.tipo, pokemon.vida, pokemon.fuerza, pokemon.velocidad, pokemon.defensa, pokemon.img_frente, null)
@@ -70,7 +70,7 @@ function CombatirBot() {
   useEffect(()=>{
     if(habilidadContrincante == null){
       // const habilidades = ["atacar","defender","atacarImprobable"]
-      const habilidades = ["atacar","atacar","atacar"]
+      const habilidades = ["atacar","curarse","atacarImprobable"]
       const randomHabilidad = Math.floor(Math.random() * habilidades.length)
       const habilidadSeleccionada = habilidades[randomHabilidad]
       console.log("habilidad seleccionada ",habilidadSeleccionada )

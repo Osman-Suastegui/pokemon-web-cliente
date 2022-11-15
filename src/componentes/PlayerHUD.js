@@ -1,6 +1,10 @@
 import "../css/PlayerHUD.css";
 
 function InfoPoke( {miPoke,danio} ) {
+
+    /*
+    width : vidaActual / vidaTotal * 100   % 
+    */ 
     return (
         <div>
             <div className='InfoJugador'>

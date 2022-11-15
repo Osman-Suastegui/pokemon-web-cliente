@@ -17,7 +17,7 @@ function CrearEquipo() {
         }
     useEffect(() => {
 
-        fetch("http://localhost:3000/obtenerPokemones")
+        fetch("https://api-pokemon-tnt.azurewebsites.net/obtenerPokemones")
             .then(data => data.json())
             .then(pokemones => {
                 setPokemones(pokemones)
@@ -39,7 +39,7 @@ function CrearEquipo() {
             "id": pokemonActualID
         }
 
-        await fetch("http://localhost:3000/guardarPokemonEquipo", {
+        await fetch("https://api-pokemon-tnt.azurewebsites.net/guardarPokemonEquipo", {
             method: "POST",
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -57,7 +57,7 @@ function CrearEquipo() {
             "usuario": localStorage.getItem("nombreUsuario"),
             "pokemonID": pokemonID
         }
-        await fetch("http://localhost:3000/eliminarPokemon", {
+        await fetch("https://api-pokemon-tnt.azurewebsites.net/eliminarPokemon", {
             method: "POST",
             headers: {
                 'Accept': 'application/json, text/plain, */*',

@@ -4,7 +4,7 @@ import MiEquipo from './MiEquipo.js';
 
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useFetcher, useNavigate } from 'react-router-dom';
 
 function Combate({ setContrincante, setPokemonContrincante, setJugador, pokemonContrincante, pokemonEnUsoJugador, jugador, contrincante, habilidadContrincante, setPokemonEnUsoJugador, setHabilidadContrincante }) {
     const [habilidad, setHabilidad] = useState(null)
@@ -15,9 +15,11 @@ function Combate({ setContrincante, setPokemonContrincante, setJugador, pokemonC
     }
 
     const elegirPokemon = (id) => {
-        console.log("id ", id)
+        
         let pokeElegido = jugador.equipo.filter(poke => poke.pokemonID === id)[0]
+        if(id === pokemonEnUsoJugador.pokemonID) return
         setPokemonEnUsoJugador(pokeElegido)
+        setHabilidad("cambiarPokemon")
     }
     const verificarSiGanoContrincante = () => {
         let pokeDebilitados = 0
@@ -65,82 +67,109 @@ function Combate({ setContrincante, setPokemonContrincante, setJugador, pokemonC
             }))
         }
     }
+    const curar = (pokemoEnUso,setPokemon) => {
+      
+        const cantidadAcurarse = Math.floor(Math.random() * pokemoEnUso.defensa)
+        setPokemon(poke => ({
+            ...poke,
+            vida : poke.vida + cantidadAcurarse
+        }))
+        
 
+    }
+
+    const usuarioAtacaContrincanteAtaca = () => {
+         // ataca usuario
+         console.log("habilidad ", habilidad)
+         if (habilidad ===  "atacar") atacar()
+         if (habilidad === "atacarImprobable") atacarImprobable()
+         if(habilidad === "defenderse") curar(pokemonEnUsoJugador,setPokemonEnUsoJugador)
+         
+         // if(habilidad== "defenderse") defenderse()
+         if (pokemonContrincante.vida - pokemonEnUsoJugador.fuerza <= 0) {
+             setBtnBloqueado(false)
+             return
+         }
+         sleep(2000).then(() => {
+             if (habilidadContrincante === "atacar") {
+                 setPokemonEnUsoJugador(poke => ({
+                     ...poke,
+                     vida: poke.vida - pokemonContrincante.fuerza
+                 }))
+
+             }
+
+             if (habilidadContrincante === "atacarImprobable") {
+                 let numRandom = Math.floor(Math.random() * 10)
+                 const numeros = [4, 7, 9]
+                 if (numeros.includes(numRandom)) {
+                     setPokemonEnUsoJugador(poke => ({
+                         ...poke,
+                         vida: poke.vida - pokemonContrincante.fuerza
+                     }))
+                 }
+             }
+             if(habilidadContrincante === "defenderse") curar(pokemonContrincante,setPokemonContrincante)
+                
+             
+
+             setBtnBloqueado(false)
+
+         })
+        
+    }
+
+    const contrincanteAtacaUsuarioAtaca = () => {
+        sleep(2000).then(() => {
+            if (habilidadContrincante === "atacar") {
+                setPokemonEnUsoJugador(poke => ({
+                    ...poke,
+                    vida: poke.vida - pokemonContrincante.fuerza
+                }))
+
+            }
+
+            if (habilidadContrincante === "atacarImprobable") {
+                let numRandom = Math.floor(Math.random() * 10)
+                const numeros = [4, 7, 9]
+                if (numeros.includes(numRandom)) {
+                    setPokemonEnUsoJugador(poke => ({
+                        ...poke,
+                        vida: poke.vida - pokemonContrincante.fuerza
+                    }))
+                }
+            }
+            if(habilidadContrincante === "curarse") curar(pokemonContrincante,setPokemonContrincante)
+
+            sleep(1000).then(() => {
+                if(pokemonEnUsoJugador.vida <= 0){
+                    setBtnBloqueado(false)
+                    return  
+                }
+                if (habilidad === "atacar") atacar()
+                if (habilidad ===  "atacarImprobable") atacarImprobable()
+                if(habilidad === "curarse") curar(pokemonEnUsoJugador,setPokemonEnUsoJugador)
+                
+                setBtnBloqueado(false)
+            })
+
+        })
+    }
     const lanzarAtaques = () => {
         setBtnBloqueado(true)
 
         if (pokemonEnUsoJugador.velocidad > pokemonContrincante.velocidad) {
-
-            // ataca usuario
-            if (habilidad == "atacar") atacar()
-            if (habilidad == "atacarImprobable") atacarImprobable()
-            // if(habilidad == "defenderse") defenderse()
-            if (pokemonContrincante.vida - pokemonEnUsoJugador.fuerza <= 0) {
-                console.log("awa")
-                setBtnBloqueado(false)
-                return
-            }
-            sleep(2000).then(() => {
-                if (habilidadContrincante === "atacar") {
-                    setPokemonEnUsoJugador(poke => ({
-                        ...poke,
-                        vida: poke.vida - pokemonContrincante.fuerza
-                    }))
-
-                }
-
-                if (habilidadContrincante === "atacarImprobable") {
-                    let numRandom = Math.floor(Math.random() * 10)
-                    const numeros = [4, 7, 9]
-                    if (numeros.includes(numRandom)) {
-                        setPokemonEnUsoJugador(poke => ({
-                            ...poke,
-                            vida: poke.vida - pokemonContrincante.fuerza
-                        }))
-                    }
-                }
-
-                setBtnBloqueado(false)
-
-            })
+            usuarioAtacaContrincanteAtaca()
+           
         } else if (pokemonContrincante.velocidad > pokemonEnUsoJugador.velocidad) {
-            console.log("aca")
-            sleep(2000).then(() => {
-                if (habilidadContrincante === "atacar") {
-                    setPokemonEnUsoJugador(poke => ({
-                        ...poke,
-                        vida: poke.vida - pokemonContrincante.fuerza
-                    }))
-
-                }
-
-                if (habilidadContrincante === "atacarImprobable") {
-                    let numRandom = Math.floor(Math.random() * 10)
-                    const numeros = [4, 7, 9]
-                    if (numeros.includes(numRandom)) {
-                        setPokemonEnUsoJugador(poke => ({
-                            ...poke,
-                            vida: poke.vida - pokemonContrincante.fuerza
-                        }))
-                    }
-                }
-
-                sleep(1000).then(() => {
-                    if(pokemonEnUsoJugador.vida <= 0){
-                        console.log("awa123")
-                        setBtnBloqueado(false)
-                        return  
-                    }
-                    if (habilidad == "atacar") atacar()
-                    if (habilidad == "atacarImprobable") atacarImprobable()
-                    setBtnBloqueado(false)
-                })
-
-            })
-
-
-
-
+           contrincanteAtacaUsuarioAtaca()
+        }else{
+            let probabilidad = Math.random()
+            if( probabilidad <= 0.5){
+                usuarioAtacaContrincanteAtaca()
+            }else{
+                contrincanteAtacaUsuarioAtaca()
+            }
         }
 
 
@@ -216,7 +245,7 @@ function Combate({ setContrincante, setPokemonContrincante, setJugador, pokemonC
                     ))}
                     <button disabled={btnBloqueado ? true : false} name='atacar' onClick={(e) => setHabilidad(e.target.name)} className='Boton-Habilidad'>Atacar seguro</button>
                     <button disabled={btnBloqueado ? true : false} name="atacarImprobable" onClick={(e) => setHabilidad(e.target.name)} className='Boton-Habilidad'>Atacar improbable pero mas danio</button>
-                    <button disabled={btnBloqueado ? true : false} name='defenderse' className='Boton-Habilidad'>Defensa</button>
+                    <button onClick={(e) => setHabilidad(e.target.name)} disabled={btnBloqueado ? true : false} name='curarse' className='Boton-Habilidad'>Curarse</button>
 
 
                 </div>

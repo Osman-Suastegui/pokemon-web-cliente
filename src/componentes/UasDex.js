@@ -7,7 +7,7 @@ function UasDex() {
     const [copiaPokemones,setCopiaPokemones] = useState([])
     const [pokemones,setPokemones] = useState([])
     useEffect(()=>{
-        fetch("http://localhost:3000/obtenerPokemones")
+        fetch("https://api-pokemon-tnt.azurewebsites.net/obtenerPokemones")
         .then(data => data.json())
         .then(pokemones =>{
             setPokemones(pokemones)

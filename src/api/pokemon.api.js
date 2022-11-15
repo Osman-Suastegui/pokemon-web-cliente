@@ -1,7 +1,7 @@
 
 
 export const obtenerEquipo = async (nombreUsuario) =>{
-    return await fetch("http://localhost:3000/obtenerEquipo", {
+    return await fetch("https://api-pokemon-tnt.azurewebsites.net/obtenerEquipo", {
         method: "POST",
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -12,7 +12,7 @@ export const obtenerEquipo = async (nombreUsuario) =>{
 }
 
 export const iniciarSesion = async (LOGIN) => {
-    return await fetch('http://localhost:3000/login', {
+    return await fetch('https://api-pokemon-tnt.azurewebsites.net/login', {
         method: 'POST',
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -22,5 +22,5 @@ export const iniciarSesion = async (LOGIN) => {
       })
 }
 export const obtenerRanking = async () =>{
-     return await fetch("http://localhost:3000/obtenerRanking")
+     return await fetch("https://api-pokemon-tnt.azurewebsites.net/obtenerRanking")
 }

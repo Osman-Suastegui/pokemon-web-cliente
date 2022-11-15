@@ -38,7 +38,7 @@ function Register() {
             contra: contrasena,
         };
 
-         fetch('http://localhost:3000/registrarse', {
+         fetch('https://api-pokemon-tnt.azurewebsites.net/registrarse', {
             method: 'POST',
             headers: {
               'Accept': 'application/json, text/plain, */*',
