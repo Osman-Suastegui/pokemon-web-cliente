@@ -1,6 +1,7 @@
 import PokemonPres from './PokemonPres'
 import { useState, useEffect } from 'react'
-import { obtenerEquipo } from '../api/pokemon.api.js'
+import { obtenerEquipo, URL_API } from '../api/pokemon.api.js'
+import { useFetcher } from 'react-router-dom'
 
 function CrearEquipo() {
     const [pokemones, setPokemones] = useState([])
@@ -13,11 +14,11 @@ function CrearEquipo() {
         setMiEquipo(miEquipoTmp)
         let entrenador = JSON.parse(localStorage.getItem("entrenador"))
         entrenador.equipo = miEquipoTmp
-        localStorage.setItem("entrenador",JSON.stringify(entrenador))
-        }
+        localStorage.setItem("entrenador", JSON.stringify(entrenador))
+    }
     useEffect(() => {
 
-        fetch("https://api-pokemon-tnt.azurewebsites.net/obtenerPokemones")
+        fetch(URL_API + "/obtenerPokemones")
             .then(data => data.json())
             .then(pokemones => {
                 setPokemones(pokemones)
@@ -33,13 +34,18 @@ function CrearEquipo() {
 
     }
     const guardarPokemon = async () => {
+        let entrenador = JSON.parse(localStorage.getItem("entrenador"))
+        if(entrenador.equipo.length  === 3 ){
+            alert("solo 3 pokemones permitidos en tu equipo")
+            return
+        }
         const usuario = localStorage.getItem("nombreUsuario")
         const mensaje = {
             "usuario": usuario,
             "id": pokemonActualID
         }
 
-        await fetch("https://api-pokemon-tnt.azurewebsites.net/guardarPokemonEquipo", {
+        await fetch(URL_API + "/guardarPokemonEquipo", {
             method: "POST",
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -57,7 +63,7 @@ function CrearEquipo() {
             "usuario": localStorage.getItem("nombreUsuario"),
             "pokemonID": pokemonID
         }
-        await fetch("https://api-pokemon-tnt.azurewebsites.net/eliminarPokemon", {
+        await fetch(URL_API + "/eliminarPokemon", {
             method: "POST",
             headers: {
                 'Accept': 'application/json, text/plain, */*',

@@ -6,18 +6,18 @@ import { useEffect, useState } from 'react'
 import Pokemon from '../clases/Pokemon';
 import Entrenador from '../clases/Entrenador';
 import {useNavigate} from 'react-router-dom'
+import {URL_API} from '../api/pokemon.api.js'
 function CombatirBot() {
-
   const [entrenador, setEntrenador] = useState(JSON.parse(localStorage.getItem("entrenador")))
   const [bot, setBot] = useState(null)
   const [pokemonEnUsoJugador, setPokemonEnUsoJugador] = useState(entrenador.equipo[0])
   const [pokemonContrincante, setPokemonContrincante] = useState()
-  const [habilidadContrincante,setHabilidadContrincante] = useState("atacar")
+  const [habilidadContrincante,setHabilidadContrincante] = useState({"habilidad":"atacar"})
+  const [miHabilidad, setMiHabilidad] = useState(null)
   const [indexBot,setIndexBot] = useState(0)
-  const navigate = useNavigate()
 
   const obtenerEquipoBot = async () => {
-    await fetch("https://api-pokemon-tnt.azurewebsites.net/obtenerPokemones")
+    await fetch(URL_API + "/obtenerPokemones")
       .then(data => data.json())
       .then(pokemones => {
         generarEquipoBot(pokemones.map(pokemon => new Pokemon(pokemon.pokemonID,pokemon.nombre, pokemon.tipo, pokemon.vida, pokemon.fuerza, pokemon.velocidad, pokemon.defensa, pokemon.img_frente, null)
@@ -70,23 +70,25 @@ function CombatirBot() {
   useEffect(()=>{
     if(habilidadContrincante == null){
       // const habilidades = ["atacar","defender","atacarImprobable"]
-      const habilidades = ["atacar","curarse","atacarImprobable"]
+      const habilidades = ["curar","curar","curar"]
       const randomHabilidad = Math.floor(Math.random() * habilidades.length)
       const habilidadSeleccionada = habilidades[randomHabilidad]
       console.log("habilidad seleccionada ",habilidadSeleccionada )
-      
-      setHabilidadContrincante(habilidadSeleccionada)
+      if(habilidadSeleccionada === 'curar'){
+        const cantidadAcurarse = Math.floor(Math.random() * pokemonContrincante.defensa)
+        setHabilidadContrincante({"habilidad":habilidadSeleccionada,'curar':cantidadAcurarse})
+      }
+      if(habilidadSeleccionada === 'atacar'){
+        setHabilidadContrincante({"habilidad":habilidadSeleccionada})        
+      }
     }
   },[habilidadContrincante])
 
 
-
-  
-
   return (
     <div className='Contenedor-Principal'>
       {
-        bot == null ? (<h1>cargando...</h1>) : (<Combate jugador={entrenador} setJugador={setEntrenador} contrincante={bot} setContrincante={setBot} pokemonEnUsoJugador={pokemonEnUsoJugador} pokemonContrincante={pokemonContrincante} setPokemonContrincante={setPokemonContrincante} habilidadContrincante={habilidadContrincante} setPokemonEnUsoJugador={setPokemonEnUsoJugador} setHabilidadContrincante={setHabilidadContrincante}/>)
+        (bot == null ) ? (<h1>cargando...</h1>) : (<Combate miHabilidad={miHabilidad} setMiHabilidad={setMiHabilidad} jugador={entrenador} setJugador={setEntrenador} contrincante={bot} setContrincante={setBot} pokemonEnUsoJugador={pokemonEnUsoJugador} pokemonContrincante={pokemonContrincante} setPokemonContrincante={setPokemonContrincante} habilidadContrincante={habilidadContrincante || null} setPokemonEnUsoJugador={setPokemonEnUsoJugador} setHabilidadContrincante={setHabilidadContrincante}/>)
 
       }
     </div>

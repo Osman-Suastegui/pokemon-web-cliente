@@ -26,9 +26,4 @@
 
 img{
     background-color: transparent;
-    filter: brightness(1.1);
-    mix-blend-mode: multiply;
-    margin: 0;
-    padding-left: 10px;
 }
-

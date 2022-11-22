@@ -11,6 +11,13 @@ function Menu() {
         localStorage.removeItem("entrenador")
         navigate("/")
     }
+    const validarEquipo = () => {
+        let entrenador = JSON.parse(localStorage.getItem("entrenador"))
+        console.log("??")
+        if(entrenador.equipo.length !== 3){
+            alert("Para entrar en combate es necesario contar con 3 pokemones")
+        }
+    }
     
     return (
         <div className="Contenedor-Menu">
@@ -22,7 +29,7 @@ function Menu() {
             <div className="Logo-repetido">
                 <div className="Contenedor-Botones">
                     <Link to="/saladecola" className="Boton-Menu">Entrar en cola</Link>
-                    <Link to="/CombatirContraBot" className="Boton-Menu">Combatir contra bot</Link>
+                    <Link onClick={validarEquipo} to={JSON.parse(localStorage.getItem("entrenador")).equipo.length === 3 ? "/CombatirContraBot" : "/menu-usuario"} className="Boton-Menu">Combatir contra bot</Link>
                     <Link to="/ranking" className="Boton-Menu">Ver Ranking</Link>
                     <Link to="/crear-equipo" className="Boton-Menu">Crear Equipo</Link>
                     <Link to="/perfil" className="Boton-Menu">Ver Perfil</Link>

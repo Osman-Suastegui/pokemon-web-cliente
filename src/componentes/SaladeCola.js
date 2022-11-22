@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import '../css/SaladeCola.css'
-
+import { URL_API } from '../api/pokemon.api'; 
 
 import BatallaMulti from './BatallaMulti.js';
-const socket = io("https://api-pokemon-tnt.azurewebsites.net");
+const socket = io(URL_API);
 
 function SaladeCola() {
     const [sala,setSalaDeBatalla] = useState()
@@ -19,19 +19,16 @@ function SaladeCola() {
         setBatallaLista(true)
     })
     
-    if(window.location.pathname == '/saladecola'){
+    if(window.location.pathname === '/saladecola'){
         window.onpopstate = () => socket.emit("salirDeSala",{"sala":sala,"nombreUsuario":localStorage.getItem("nombreUsuario")})
     }    
  
     return (
         <div className="contenedor-cola">
             
-            {batallaLista ? <BatallaMulti socket={socket} sala={sala} /> : <div className='Cola-Text'>
-                Buscando oponente...
+            {batallaLista ? <BatallaMulti socket={socket} sala={sala} /> : <div className='Cola-Text'>Buscando oponente...
                 <img src='https://www.gifsanimados.org/data/media/1446/pokemon-imagen-animada-0034.gif'/>
-                </div> 
-                }
-           
+            </div> }
         </div>
     );
 }

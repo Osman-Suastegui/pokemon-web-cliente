@@ -26,7 +26,6 @@ function Chat({sala,socket}) {
     })  
 
     socket.on("mimensaje",(msg)=>{
-        console.log("msg " ,msg)
         let contMensaje = { 
             "usuario" : msg.usuario,
             "mensaje" : msg.mensaje

@@ -1,13 +1,14 @@
 import  '../css/UasDesx.css' ;
 import {useState,useEffect} from 'react'
 import PokemonPres from './PokemonPres';
+import { URL_API } from "../api/pokemon.api";
 
 function UasDex() {
     
     const [copiaPokemones,setCopiaPokemones] = useState([])
     const [pokemones,setPokemones] = useState([])
     useEffect(()=>{
-        fetch("https://api-pokemon-tnt.azurewebsites.net/obtenerPokemones")
+        fetch(URL_API + "/obtenerPokemones")
         .then(data => data.json())
         .then(pokemones =>{
             setPokemones(pokemones)

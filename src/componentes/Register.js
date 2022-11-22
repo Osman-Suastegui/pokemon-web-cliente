@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/Register.css";
-
+import { URL_API } from "../api/pokemon.api";
 import { useState } from 'react'
 
 function Register() {
@@ -38,7 +38,7 @@ function Register() {
             contra: contrasena,
         };
 
-         fetch('https://api-pokemon-tnt.azurewebsites.net/registrarse', {
+         fetch(URL_API+ "/registrarse", {
             method: 'POST',
             headers: {
               'Accept': 'application/json, text/plain, */*',

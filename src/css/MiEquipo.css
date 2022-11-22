@@ -1,9 +1,10 @@
 .Contenedor-Equipo{
-    background-color: rgb(206, 191, 191);
+    background-color: rgba(0,0,0,0.5);
     width: 8rem;
-    height: 15rem;
+    height: 10rem;
     border-radius: 1rem;
     text-align: center;
+    color: white;
 }
 
 .Contenedor-Equipo img {
