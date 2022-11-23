@@ -1,0 +1,41 @@
+
+.historial-partida{
+    margin: 5px;
+    border-color: rgb(0, 0, 0);
+    border-width:  3px ; 
+    border-style: solid;
+    
+}
+.historial-partida > section {
+    border-width: 1px;
+    border-style: solid;
+}
+.historial-partida .historial-partida-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: yellow;
+}
+.historial-partida .historial-partida-info h5 {
+    margin: 0;
+    padding: 0;
+}
+.historial-partida > .historial-partida-usuario  {
+    display: flex;
+    align-items: center;
+    background-color: rgb(95, 216, 95);
+    
+}
+.historial-partida > .historial-partida-contrincante {
+    display: flex;
+    align-items: center;
+    background-color: rgb(241, 46, 46);
+    
+    
+}
+.historial-partida img {
+    width: 3%;
+    height: 3%;
+ 
+ 
+}

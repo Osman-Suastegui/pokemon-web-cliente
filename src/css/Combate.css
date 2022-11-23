@@ -4,8 +4,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
-    width: 70%;
-    height: 70%;
+    width: 80%;
+    height: 80%;
     left: 1vw;
     top: 1vh;
 }
@@ -54,14 +54,15 @@
 }
 .Boton-Pokemon{
     width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
+    height: 4rem;
+    text-size-adjust: 50%;
+    border-radius: 20%;
     border: 2px solid black;
     color: black;
     background-image: url("https://www.kindpng.com/picc/m/107-1075263_transparent-pokeball-png-pokemon-ball-2d-png-download.png");
     margin: 2em;
     font-weight: bold;
-    cursor: pointer;
+    cursor: pointer;    
 }
 .Pokemons {
     right: 0; 

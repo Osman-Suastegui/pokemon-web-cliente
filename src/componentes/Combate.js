@@ -61,6 +61,14 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         setMiHabilidad({"habilidad":'curar',"danio":0,"curar":cantidadAcurarse})
 
     }
+    const elegirAtacarImprobable = () => {
+        setBtnBloqueado(true)
+        let numRandom = Math.floor(Math.random() * 9)
+        const numeros = [1,2,3,4,5,6,7,8]
+        const esAcertado = numeros.includes(numRandom)
+        let danioHecho = pokemonEnUsoJugador.fuerza * 1.3
+        setMiHabilidad({"habilidad":'atacarImprobable',"danio":danioHecho,acerto:esAcertado})
+    }
     const atacar = () => {
         setPokemonContrincante(poke => ({
             ...poke,
@@ -68,16 +76,14 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         }))
     }
     const atacarImprobable = () => {
-
-        let numRandom = Math.floor(Math.random() * 10)
-        const numeros = [4, 7, 9]
-        if (numeros.includes(numRandom)) {
-            setPokemonContrincante(poke => ({
-                ...poke,
-                vida: poke.vida - pokemonEnUsoJugador.fuerza
-            }))
+            if(miHabilidad.acerto){
+                setPokemonContrincante(poke => ({
+                    ...poke,
+                    vida: poke.vida - miHabilidad.danio
+                }))
+            }
         }
-    }
+   
     const curar = (pokemoEnUso,setPokemon,entrenador) => {
         setPokemon(poke => ({
             ...poke,
@@ -107,12 +113,10 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
              }
 
              if (habilidadContrincante.habilidad === "atacarImprobable") {
-                 let numRandom = Math.floor(Math.random() * 10)
-                 const numeros = [4, 7, 9]
-                 if (numeros.includes(numRandom)) {
+                 if (habilidadContrincante.acerto) {
                      setPokemonEnUsoJugador(poke => ({
                          ...poke,
-                         vida: poke.vida - pokemonContrincante.fuerza
+                         vida: poke.vida - habilidadContrincante.danio
                      }))
                  }
              }
@@ -137,12 +141,10 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
             }
 
             if (habilidadContrincante.habilidad === "atacarImprobable") {
-                let numRandom = Math.floor(Math.random() * 10)
-                const numeros = [4, 7, 9]
-                if (numeros.includes(numRandom)) {
+                if (habilidadContrincante.acerto) {
                     setPokemonEnUsoJugador(poke => ({
                         ...poke,
-                        vida: poke.vida - pokemonContrincante.fuerza
+                        vida: poke.vida - habilidadContrincante.danio
                     }))
                 }
             }
@@ -189,8 +191,6 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
             lanzarAtaques()
             setMiHabilidad(null)
             setHabilidadContrincante(null)
-
-
 
         }
     }, [miHabilidad, habilidadContrincante])
@@ -244,14 +244,16 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                     <div className='Pokemons'>
                         <MiEquipo equipos={contrincante.equipo} jugador={contrincante.nombre}  />
                         <MiEquipo equipos={jugador.equipo} jugador={jugador.nombre}   />
+                        {jugador.equipo.map(poke => (
+                        <button onClick={() => elegirPokemon(poke.pokemonID)} disabled={poke.vida <= 0 ? true : false || btnBloqueado ? true : false} className='Boton-Pokemon'>{poke.nombre}</button>
+                         ))}
                     </div>
+                   
                 </div>
                 <div className='Habilidades'>
-                    {jugador.equipo.map(poke => (
-                        <button onClick={() => elegirPokemon(poke.pokemonID)} disabled={poke.vida <= 0 ? true : false || btnBloqueado ? true : false} className='Boton-Pokemon'>{poke.nombre}</button>
-                    ))}
+              
                     <button disabled={btnBloqueado ? true : false} name='atacar' onClick={elegirAtacar} className='Boton-Habilidad'>Atacar seguro</button>
-                    <button disabled={btnBloqueado ? true : false} name="atacarImprobable" onClick={(e) => setMiHabilidad(e.target.name)} className='Boton-Habilidad'>Atacar improbable pero mas danio</button>
+                    <button disabled={btnBloqueado ? true : false} name="atacarImprobable" onClick={elegirAtacarImprobable} className='Boton-Habilidad'>Atacar improbable pero mas danio</button>
                     <button onClick={elegirCurarse} disabled={btnBloqueado ? true : false} name='curar' className='Boton-Habilidad'>Curarse</button>
                 </div>
             </div>

@@ -69,8 +69,7 @@ function CombatirBot() {
 
   useEffect(()=>{
     if(habilidadContrincante == null){
-      // const habilidades = ["atacar","defender","atacarImprobable"]
-      const habilidades = ["curar","curar","curar"]
+      const habilidades = ["atacar","curar","atacarImprobable"]
       const randomHabilidad = Math.floor(Math.random() * habilidades.length)
       const habilidadSeleccionada = habilidades[randomHabilidad]
       console.log("habilidad seleccionada ",habilidadSeleccionada )
@@ -80,6 +79,14 @@ function CombatirBot() {
       }
       if(habilidadSeleccionada === 'atacar'){
         setHabilidadContrincante({"habilidad":habilidadSeleccionada})        
+      }
+      if(habilidadSeleccionada === 'atacarImprobable'){
+        let numRandom = Math.floor(Math.random() * 9)
+        const numeros = [1,2,3,4,5,6,7,8]
+        const esAcertado = numeros.includes(numRandom)
+        let danioHecho = pokemonContrincante.fuerza * 1.3
+        setHabilidadContrincante({"habilidad":'atacarImprobable',"danio":danioHecho,acerto:esAcertado})
+
       }
     }
   },[habilidadContrincante])
