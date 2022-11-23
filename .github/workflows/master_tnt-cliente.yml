@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'tnt-cliente'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C5F87E21ADC542878141E49C585EAEE3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9136D65E81D64DCF81F7390294C0021A }}
           package: .
