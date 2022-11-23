@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrincante, setJugador, pokemonContrincante, pokemonEnUsoJugador, jugador, contrincante, habilidadContrincante, setPokemonEnUsoJugador, setHabilidadContrincante }) {
 
     const [btnBloqueado, setBtnBloqueado] = useState(false)
+    const [btnHabilidadas,setBtnHabilidades] = useState(false)
     const navigate = useNavigate()
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -21,6 +22,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         setBtnBloqueado(true)
         setPokemonEnUsoJugador(pokeElegido)
         setMiHabilidad({"habilidad":"cambiarPokemon","danio":0,"curar":0})
+        setBtnHabilidades(false)
     }
     const verificarSiGanoContrincante = () => {
         let pokeDebilitados = 0
@@ -209,7 +211,8 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
 
         verificarGanador()
         if (pokemonEnUsoJugador.vida <= 0) {
-            alert("El pokemon " + pokemonEnUsoJugador.nombre + " ha sido debilitado cambia de pokemon o se escogera aleatoriamente ")
+            alert("El pokemon " + pokemonEnUsoJugador.nombre + " ha sido debilitado, cambia de pokemon ")
+            setBtnHabilidades(true)
             setBtnBloqueado(false)
         }
     }
@@ -245,16 +248,16 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                         <MiEquipo equipos={contrincante.equipo} jugador={contrincante.nombre}  />
                         <MiEquipo equipos={jugador.equipo} jugador={jugador.nombre}   />
                         {jugador.equipo.map(poke => (
-                        <button onClick={() => elegirPokemon(poke.pokemonID)} disabled={poke.vida <= 0 ? true : false || btnBloqueado ? true : false} className='Boton-Pokemon'>{poke.nombre}</button>
+                        <button onClick={() => elegirPokemon(poke.pokemonID)} disabled={poke.vida <= 0 ? true : false || btnBloqueado} className='Boton-Pokemon'>{poke.nombre}</button>
                          ))}
                     </div>
                    
                 </div>
                 <div className='Habilidades'>
               
-                    <button disabled={btnBloqueado ? true : false} name='atacar' onClick={elegirAtacar} className='Boton-Habilidad'>Atacar seguro</button>
-                    <button disabled={btnBloqueado ? true : false} name="atacarImprobable" onClick={elegirAtacarImprobable} className='Boton-Habilidad'>Atacar improbable pero mas danio</button>
-                    <button onClick={elegirCurarse} disabled={btnBloqueado ? true : false} name='curar' className='Boton-Habilidad'>Curarse</button>
+                    <button disabled={btnBloqueado ||  btnHabilidadas } name='atacar' onClick={elegirAtacar} className='Boton-Habilidad'>Atacar seguro</button>
+                    <button disabled={btnBloqueado || btnHabilidadas } name="atacarImprobable" onClick={elegirAtacarImprobable} className='Boton-Habilidad'>Atacar improbable pero mas danio</button>
+                    <button onClick={elegirCurarse} disabled={btnBloqueado || btnHabilidadas } name='curar' className='Boton-Habilidad'>Curarse</button>
                 </div>
             </div>
     );
