@@ -294,22 +294,28 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
             <div className='Contenedor-Combate'>
                 {/* falta crear un arreglo de links de backgrounds y que se escojan random en cada batalla */}
                 <div className='Contenedor-Combate-Info'>
-                    <div className='Contenedor-Info'>
-                        <InfoPoke miPoke={pokemonContrincante} className="J2" nombre="contrincante" />
-                        <InfoPoke miPoke={pokemonEnUsoJugador} className="J1" nombre="usuario"/>
-                    </div>
 
+                    <section className='poke2'>
+                        <InfoPoke miPoke={pokemonEnUsoJugador} className="Usuario" nombre="usuario" />
+                    </section>
+                    <section className='poke1'>
+                        <InfoPoke miPoke={pokemonContrincante} className="Contrincante" nombre="contrincante" />
+                    </section>
+                  
+                    
                     <div className='Pokemons'>
                         <MiEquipo equipos={contrincante.equipo} jugador={contrincante.nombre}  />
                         <MiEquipo equipos={jugador.equipo} jugador={jugador.nombre}   />
-                        {jugador.equipo.map(poke => (
-                        <button onClick={() => elegirPokemon(poke.pokemonID)} disabled={poke.vida <= 0 ? true : false || btnBloqueado} className='Boton-Pokemon'>{poke.nombre}</button>
-                         ))}
+                        <div className="cambiar-poke">
+                            {jugador.equipo.map(poke => (
+                            <button onClick={() => elegirPokemon(poke.pokemonID)} disabled={poke.vida <= 0 ? true : false || btnBloqueado} className='Boton-Pokemon'>{poke.nombre}</button>
+                            ))}
+                        </div>
+                        
                     </div>
                    
                 </div>
                 <div className='Habilidades'>
-              
                     <button disabled={btnBloqueado ||  btnHabilidadas } name='atacar' onClick={elegirAtacar} className='Boton-Habilidad'>Atacar seguro</button>
                     <button disabled={btnBloqueado || btnHabilidadas } name="atacarImprobable" onClick={elegirAtacarImprobable} className='Boton-Habilidad'>Atacar improbable pero mas danio</button>
                     <button onClick={elegirCurarse} disabled={btnBloqueado || btnHabilidadas } name='curar' className='Boton-Habilidad'>Curarse</button>

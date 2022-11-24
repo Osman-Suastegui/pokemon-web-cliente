@@ -1,5 +1,5 @@
 // API  https://api-pokemon-tnt.azurewebsites.net
-export const URL_API = "http://localhost:3000"
+export const URL_API = "https://api-pokemon-tnt.azurewebsites.net"
 
 export const obtenerHistorial = async (nombreUsuario) => {
   return await fetch(URL_API + "/obtenerHistorial" +"/"+nombreUsuario)

@@ -1,39 +1,51 @@
 .Contenedor-principal
-{
+{   
     width: 100%;
     height: 100%;
+    display: flex;
     background-image: url(../img/IndexBackground.jfif);
     background-repeat: no-repeat;
-    background-size: cover;
-    position: fixed;
     align-items: center;    
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 23px;
-    text-transform: uppercase;;
+    text-transform: uppercase;
 }
-
 .repetir-logo
 {   
-    width: 100%;
-    height: 100%;
     background-image: url(../img/Logo.png);
     background-repeat: repeat;
-}
-.Titulo-Ranking{
-    color: white; 
-    animation: fuego 2s infinite;
+    background-size: 20%;
 }
 
+
+.Titulo-Ranking{
+    color: white; 
+    animation: fuego 2s infinite , arcoiris 2s infinite, rotarDerecha 2s infinite;
+    text-shadow: 0 0 5px #000;
+}
+
+.marcotabla{
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    scrollbar-color: #000000 #000000;
+    scrollbar-color: #000 #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 3% 3% 7% 5%;
+    margin-left: 73%;
+    
+}
 .styled-table 
 {   
+    position: center;
+    height: 20%;
     background-color: rgba(233, 230, 230, 0.877);
     border-collapse: collapse; 
-    margin: 25px 0; 
     font-size: 1em; 
     font-family: sans-serif;     
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    overflow-y: scroll; 
 }
 .styled-table thead tr 
 {   

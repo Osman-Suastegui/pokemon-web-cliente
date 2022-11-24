@@ -16,30 +16,28 @@ function Ranking() {
     return (
         <div className='Contenedor-principal'>
             <div className='Titulo-Ranking'>
-                    <h1>Ranking</h1>
+                <h1>Ranking</h1>
             </div>
-            <div className='repetir-logo'>
-                <div className='Tabla-Ranking'>
-                    <table class="styled-table">
-                            <thead> 
-                                <tr> 
-                                    <th>POSICION</th> 
-                                    <th>NOMBRE</th> 
-                                    <th>PTS</th> 
-                                </tr> 
-                            </thead> 
-                            <tbody>
-                                {ranking.map((usuario, index) => (
-                                    <tr>
-                                        <td>{index + 1} </td>
-                                        <td>{usuario.nomusuario} </td>
-                                        <td>{usuario.puntaje} </td>
-                                    </tr>
-                                    ))
-                                }
-                            </tbody>
-                    </table>
-                </div>
+            <div className='marcotabla'>
+                <table class="styled-table">
+                    <thead> 
+                        <tr> 
+                            <th>POSICION</th> 
+                            <th>NOMBRE</th> 
+                            <th>PTS</th> 
+                        </tr> 
+                    </thead> 
+                    <tbody>
+                        {ranking.map((usuario, index) => (
+                            <tr>
+                                <td>{index + 1} </td>
+                                <td>{usuario.nomusuario} </td>
+                                <td>{usuario.puntaje} </td>
+                            </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     );
