@@ -5,12 +5,15 @@ import MiEquipo from './MiEquipo.js';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {insertarHistorial} from '../api/pokemon.api.js'
 
 function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrincante, setJugador, pokemonContrincante, pokemonEnUsoJugador, jugador, contrincante, habilidadContrincante, setPokemonEnUsoJugador, setHabilidadContrincante }) {
 
     const [btnBloqueado, setBtnBloqueado] = useState(false)
     const [btnHabilidadas,setBtnHabilidades] = useState(false)
+    const [tiempoIniciado,setTiempoIniciado] = useState(new Date().getTime())
     const navigate = useNavigate()
+   
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -41,13 +44,63 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
     }
     const verificarGanador = () => {
         if (verificarSiGane()) {
-            alert("El jugador " + jugador.nombre + " ha ganado ")
+            alert("El jugador " + jugador.nombre + " ha ganado  " )
+            let fechaNueva = new Date().getTime()
+            let t = Math.floor((fechaNueva-tiempoIniciado) / 1000) 
+          
+            let up1 = jugador.equipo[0].pokemonID
+            let up2 = jugador.equipo[1].pokemonID
+            let up3 = jugador.equipo[2].pokemonID
 
+            let rp1 = contrincante.equipo[0].pokemonID
+            let rp2 = contrincante.equipo[1].pokemonID
+            let rp3 = contrincante.equipo[2].pokemonID
+            
+            let date = new Date()
+
+            let day = date.getDate()
+            let month = date.getMonth() + 1
+            let year = date.getFullYear()
+            let fecha = ""
+            if(month < 10){
+                fecha = `${year}-0${month}-${day}`
+            
+            }else{
+                fecha = `${year}-${month}-${day}`
+            }
+
+            insertarHistorial(jugador.nombre,up1,up2,up3,contrincante.nombre,rp1,rp2,rp3,'1',fecha,t)
             navigate("/menu-usuario")
 
-        }
-        if (verificarSiGanoContrincante()) {
-            alert("El jugador " + contrincante.nombre + " ha ganado ")
+        }else if (verificarSiGanoContrincante()) {
+            alert("El jugador " + contrincante.nombre + " ha ganado")
+            let fechaNueva = new Date().getTime()
+            let t = Math.floor((fechaNueva-tiempoIniciado) / 1000) 
+
+              
+            let up1 = jugador.equipo[0].pokemonID
+            let up2 = jugador.equipo[1].pokemonID
+            let up3 = jugador.equipo[2].pokemonID
+
+            let rp1 = contrincante.equipo[0].pokemonID
+            let rp2 = contrincante.equipo[1].pokemonID
+            let rp3 = contrincante.equipo[2].pokemonID
+            
+            let date = new Date()
+
+            let day = date.getDate()
+            let month = date.getMonth() + 1
+            let year = date.getFullYear()
+            let fecha = ""
+            if(month < 10){
+                fecha = `${year}-0${month}-${day}`
+            
+            }else{
+                fecha = `${year}-${month}-${day}`
+            }
+            
+            insertarHistorial(jugador.nombre,up1,up2,up3,contrincante.nombre,rp1,rp2,rp3,'0',fecha,t)
+
             navigate("/menu-usuario")
 
         }
@@ -196,7 +249,9 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
 
         }
     }, [miHabilidad, habilidadContrincante])
-
+    useEffect(()=>{
+        verificarGanador()
+    },[contrincante,jugador])
     useEffect(() => {
         setJugador(jugador => ({
             ...jugador,
@@ -209,7 +264,6 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
             })
         }))
 
-        verificarGanador()
         if (pokemonEnUsoJugador.vida <= 0) {
             alert("El pokemon " + pokemonEnUsoJugador.nombre + " ha sido debilitado, cambia de pokemon ")
             setBtnHabilidades(true)
@@ -217,6 +271,8 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         }
     }
     , [pokemonEnUsoJugador?.vida])
+
+
 
 
     useEffect(() => {
@@ -230,7 +286,6 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
 
             })
         }))
-        verificarGanador()
 
     }
     , [pokemonContrincante?.vida])

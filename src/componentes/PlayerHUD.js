@@ -8,7 +8,7 @@ function InfoPoke( {miPoke,nombre} ) {
     width : vidaActual / vidaTotal * 100   % 
     */ 
     useEffect(()=>{
-        obtenerVidaTotalPokemon(miPoke.pokemonID).then(poke =>setVidaTotal(poke.vida))
+        obtenerVidaTotalPokemon(miPoke?.pokemonID).then(poke =>setVidaTotal(poke.vida))
     },[])
    
     return (

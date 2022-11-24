@@ -2,7 +2,7 @@
 
 import '../css/HistorialPartida.css'
 function HistorialPartida({historial}) {
-    //
+    
     return (
         <section className='historial-partida'>
 
@@ -11,7 +11,6 @@ function HistorialPartida({historial}) {
                     <>
                     <section className='historial-partida-info'>
                         <h5>
-
                         {"Resultado: " +( h.resulCombate === '1' ? 'Victoria' : 'Derrota') }
                         </h5>
                         <h5>

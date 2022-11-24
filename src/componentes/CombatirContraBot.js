@@ -5,7 +5,6 @@ import Combate from './Combate.js';
 import { useEffect, useState } from 'react'
 import Pokemon from '../clases/Pokemon';
 import Entrenador from '../clases/Entrenador';
-import {useNavigate} from 'react-router-dom'
 import {URL_API} from '../api/pokemon.api.js'
 function CombatirBot() {
   const [entrenador, setEntrenador] = useState(JSON.parse(localStorage.getItem("entrenador")))
