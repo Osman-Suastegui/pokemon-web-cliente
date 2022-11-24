@@ -11,7 +11,7 @@ function InfoPoke( {miPoke,nombre} ) {
             <div className='InfoJugador'>
                 <h1>{miPoke?.nombre}</h1>
                 <h3>PS: {miPoke?.vida }</h3> 
-                <div className="BordeVida"><div className="BarraVida" style={{width: `${miPoke?.vida / vidaTotal * 100}%`}}></div> </div>   
+                <div className="BordeVida"><div className="BarraVida" style={{width: `${miPoke?.vida / miPoke?.vidaTotal * 100}%`}}></div> </div>   
             </div>
             <div className='img'>
                 <img src={nombre  === 'usuario' ?miPoke?.img_espaldas: miPoke?.img_frente} />
