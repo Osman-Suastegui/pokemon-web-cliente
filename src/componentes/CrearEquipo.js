@@ -2,6 +2,7 @@ import PokemonPres from './PokemonPres'
 import { useState, useEffect } from 'react'
 import { obtenerEquipo, URL_API } from '../api/pokemon.api.js'
 import { useFetcher } from 'react-router-dom'
+import Pokemon from '../clases/Pokemon.js'
 
 function CrearEquipo() {
     const [pokemones, setPokemones] = useState([])
@@ -10,7 +11,21 @@ function CrearEquipo() {
 
     const cargarEquipo = async () => {
         const response = await obtenerEquipo(localStorage.getItem("nombreUsuario"))
-        const miEquipoTmp = await response.json()
+        let miEquipoTmp = await response.json()
+        miEquipoTmp = miEquipoTmp.map(pokemon => {
+            return new Pokemon(
+            pokemon.pokemonID,
+            pokemon.nombre,
+            pokemon.tipo,
+            pokemon.vida,
+            pokemon.fuerza,
+            pokemon.velocidad,
+            pokemon.defensa,
+            pokemon.img_frente,
+            pokemon.img_espaldas
+            )
+        })
+        console.log(miEquipoTmp)
         setMiEquipo(miEquipoTmp)
         let entrenador = JSON.parse(localStorage.getItem("entrenador"))
         entrenador.equipo = miEquipoTmp

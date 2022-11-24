@@ -16,7 +16,7 @@ function Perfil() {
             let victorias = 0
             let derrotas = 0
             historial.forEach(h => {
-                if(h.resultCombate === '1')victorias++;
+                if(h.resulCombate === '1')victorias++;
                 else derrotas++;
             })
             setCantidadDerrotas(derrotas)

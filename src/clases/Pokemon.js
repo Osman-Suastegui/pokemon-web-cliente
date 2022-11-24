@@ -10,6 +10,7 @@ class Pokemon{
         this.defensa = defensa;
         this.img_frente = img_frente
         this.img_espaldas = img_espaldas
+        this.vidaTotal = vida 
     }
 
     show(){

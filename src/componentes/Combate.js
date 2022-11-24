@@ -142,7 +142,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
     const curar = (pokemoEnUso,setPokemon,entrenador) => {
         setPokemon(poke => ({
             ...poke,
-            vida : poke.vida + (entrenador === 'usuario' ?  miHabilidad.curar : habilidadContrincante.curar) 
+            vida :(poke.vida + (entrenador === 'usuario' ?  miHabilidad.curar : habilidadContrincante.curar)) > poke.vidaTotal ? poke.vidaTotal : poke.vida + (entrenador === 'usuario' ?  miHabilidad.curar : habilidadContrincante.curar)
         }))
     }
 
