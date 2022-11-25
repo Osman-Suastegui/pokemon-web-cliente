@@ -34,8 +34,9 @@
     
 }
 .historial-partida img {
-    width: 3%;
-    height: 3%;
- 
+    /* space between */
+    padding-left: 2%;
+    width: 5%;
+    height: 5%;
  
 }

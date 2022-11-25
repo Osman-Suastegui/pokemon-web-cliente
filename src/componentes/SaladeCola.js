@@ -25,7 +25,6 @@ function SaladeCola() {
  
     return (
         <div className="contenedor-cola">
-            
             {batallaLista ? <BatallaMulti socket={socket} sala={sala} /> : <div className='Cola-Text'>Buscando oponente...
                 <img src='https://www.gifsanimados.org/data/media/1446/pokemon-imagen-animada-0034.gif'/>
             </div> }

@@ -43,7 +43,11 @@
     margin: 2em;
     font-weight: bold;
     cursor: pointer;
-}
+    background-repeat: no-repeat;   
+    background-position: center;
+    background-color: white;
+}   
+
 .Boton-Pokemon{
     width: 5rem;
     height: 4rem;
@@ -54,14 +58,13 @@
     background-image: url("https://www.kindpng.com/picc/m/107-1075263_transparent-pokeball-png-pokemon-ball-2d-png-download.png");
     font-weight: bold;
     cursor: pointer;    
-    margin: 1%;
     margin-top: 10%;
 }
 
 .Pokemons {
     right: 0; 
-    width: 15%;
-    height: 100%;
+    width: 15%; 
+    margin-left: 10px;;
     animation: burbuja 2s;
 }
 
@@ -69,12 +72,29 @@
 .cambiar-poke {
     width: 100%;
     height: 100%;
+    /* columna de botones */
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Boton-Habilidad[name="atacar"]{
+    background-image: url("https://www.pngfind.com/pngs/m/174-1744125_minecraft-diamond-sword-minecraft-stone-sword-pixel-art.png");
+    background-size: 80%;
+
+}
+.Boton-Habilidad[name="curar"]{
+    background-image: url("https://img2.freepng.es/20171219/wqk/vector-red-cross-red-circle-texture-5a39dab23ef138.69511669151374097825786568.jpg");
+    background-size: 100%;
+
+}
+.Boton-Habilidad[name="atacarImprobable"]{
+    background-image: url("https://www.pngfind.com/pngs/m/410-4109659_the-gallery-for-crossed-diamond-sword-minecraft-minecraft.png");
+    background-size: 100%;
 }
 
 .poke2{
     width: 100%;
-    height: 100%;
+    height: 100%;   
     display: flex;
     margin: 1%;
     margin-top: 20%;

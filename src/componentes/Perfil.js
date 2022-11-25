@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { obtenerHistorial } from '../api/pokemon.api.js'
 import HistorialPartida from './HistorialPartida.js'
+import "../css/Perfil.css"
 
 function Perfil() {
     const [entrenador, setEntrenador] = useState(JSON.parse(localStorage.getItem("entrenador")))
@@ -27,12 +28,14 @@ function Perfil() {
     return (
         <div className='perfil'>
             <section className='datos-perfil'>
-                <h4>tu nombre es {entrenador.nombre}</h4>
-                <h4>tu puntaje es {entrenador.puntuacion}</h4>
-                <h4>Total de partidas jugadas: {cantidaDerrotas + cantidadVictorias}</h4>
-                <h4>Cantidad de victorias {cantidadVictorias}</h4>
-                <h4>Cantidad de derrotas {cantidaDerrotas}</h4>
-
+                <h1>{entrenador.nombre}</h1>
+                <h4>{entrenador.puntuacion} ₧</h4>
+                <div>
+                    <h4>Total de partidas jugadas: {cantidaDerrotas + cantidadVictorias}</h4>
+                    <h4>Cantidad de victorias {cantidadVictorias}</h4>
+                    <h4>Porcentaje de Victorias: {(cantidaDerrotas + cantidadVictorias)/cantidadVictorias *100} %</h4>
+                    <h4>Cantidad de derrotas {cantidaDerrotas}</h4>
+                </div>
             </section>
             <section className='historial'>
                 {

@@ -165,6 +165,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                      vida: poke.vida - pokemonContrincante.fuerza
                  }))
 
+                 
              }
 
              if (habilidadContrincante.habilidad === "atacarImprobable") {
@@ -192,7 +193,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                     ...poke,
                     vida: poke.vida - pokemonContrincante.fuerza
                 }))
-
+                
             }
 
             if (habilidadContrincante.habilidad === "atacarImprobable") {
@@ -219,7 +220,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
 
         })
     }
-    const lanzarAtaques = () => {
+    const lanzarAtaques = () => {  //Arreglar atomicidad ataque
         setBtnBloqueado(true)
 
         if (pokemonEnUsoJugador.velocidad > pokemonContrincante.velocidad) {
@@ -235,9 +236,6 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                 contrincanteAtacaUsuarioAtaca()
             }
         }
-
-
-
     }
 
     useEffect(() => {
@@ -316,9 +314,9 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                    
                 </div>
                 <div className='Habilidades'>
-                    <button disabled={btnBloqueado ||  btnHabilidadas } name='atacar' onClick={elegirAtacar} className='Boton-Habilidad'>Atacar seguro</button>
-                    <button disabled={btnBloqueado || btnHabilidadas } name="atacarImprobable" onClick={elegirAtacarImprobable} className='Boton-Habilidad'>Atacar improbable pero mas danio</button>
-                    <button onClick={elegirCurarse} disabled={btnBloqueado || btnHabilidadas } name='curar' className='Boton-Habilidad'>Curarse</button>
+                    <button disabled={btnBloqueado ||  btnHabilidadas } name='atacar' onClick={elegirAtacar} className='Boton-Habilidad' alt="Ataque simple 100& accuracy"></button>
+                    <button disabled={btnBloqueado || btnHabilidadas } name="atacarImprobable" onClick={elegirAtacarImprobable} className='Boton-Habilidad'></button>
+                    <button onClick={elegirCurarse} disabled={btnBloqueado || btnHabilidadas } name='curar' className='Boton-Habilidad'></button>
                 </div>
             </div>
     );

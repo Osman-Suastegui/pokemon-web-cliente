@@ -35,7 +35,9 @@
     align-items: center;
     padding: 3% 3% 7% 5%;
     margin-left: 73%;
-    
+}
+.marcotabla::-webkit-scrollbar {
+    display: none;
 }
 .styled-table 
 {   

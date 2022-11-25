@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { obtenerEquipo, URL_API } from '../api/pokemon.api.js'
 import { useFetcher } from 'react-router-dom'
 import Pokemon from '../clases/Pokemon.js'
+import "../css/CrearEquipo.css"
 
 function CrearEquipo() {
     const [pokemones, setPokemones] = useState([])
@@ -92,7 +93,7 @@ function CrearEquipo() {
     }
 
     return (
-        <div>
+        <div className="Contenedor-CrearEquipo">
             <select onChange={handleChange}>
                 {
                     pokemones.map(pokemon => (
@@ -101,14 +102,17 @@ function CrearEquipo() {
                 }
             </select>
             <button onClick={guardarPokemon}>guardar pokemon </button>
-            {
-                miEquipo.map(miPokemon => (
-                    <div key={miPokemon.pokemonID}>
-                        <PokemonPres pokemon={miPokemon} />
-                        <button onClick={() => eliminarPokemon(miPokemon.pokemonID)}>Eliminar pokemon </button>
-                    </div>
-                ))
-            }
+            <section className="Contenedor-Pokemones">
+                <title>TU EQUIPO:</title>
+                {
+                    miEquipo.map(miPokemon => (
+                        <div key={miPokemon.pokemonID}>
+                            <PokemonPres pokemon={miPokemon} />
+                            <button className="EliminarPoke" onClick={() => eliminarPokemon(miPokemon.pokemonID)}>X</button>
+                        </div>
+                    ))
+                }
+            </section>
         </div>
 
 
