@@ -4,10 +4,12 @@
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     left: 1vw;
     top: 1vh;
+    box-shadow: 0 0 5px 5px #000;
+    
 }
 .Contenedor-Combate-Info{
     display: flex;
@@ -21,24 +23,15 @@
 .Contenedor-Info img{
     width: 7vw;
     height: 14vh;
-    position: fixed;
 }
 
-.J1{
-    align-items: right;
-    animation: aparecerizquierda 2s;
-}
 
-.J2{
-    position: absolute;
-    top: 15px;
-    right: 0;
-    animation: aparecerderecha 2s;
-}
+
 
 .Habilidades{
-    top: 35rem;
-    right: 0;
+    position: absolute;
+    top: 80%;
+    width: 50%;
     animation: burbuja 2s;
 }
 
@@ -47,7 +40,6 @@
     height: 5rem;
     border-radius: 50%;
     border: 2px solid black;
-    background-color: white;
     margin: 2em;
     font-weight: bold;
     cursor: pointer;
@@ -60,13 +52,33 @@
     border: 2px solid black;
     color: black;
     background-image: url("https://www.kindpng.com/picc/m/107-1075263_transparent-pokeball-png-pokemon-ball-2d-png-download.png");
-    margin: 2em;
     font-weight: bold;
     cursor: pointer;    
+    margin: 1%;
+    margin-top: 10%;
 }
+
 .Pokemons {
     right: 0; 
+    width: 15%;
+    height: 100%;
     animation: burbuja 2s;
+}
+
+
+.cambiar-poke {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.poke2{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: 1%;
+    margin-top: 20%;
+    cursor: pointer;
 }
 
 @keyframes aparecerizquierda{
