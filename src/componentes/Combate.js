@@ -5,7 +5,7 @@ import MiEquipo from './MiEquipo.js';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {insertarHistorial} from '../api/pokemon.api.js'
+import {insertarHistorial,obtenerPuntaje,actualizarPuntaje} from '../api/pokemon.api.js'
 
 function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrincante, setJugador, pokemonContrincante, pokemonEnUsoJugador, jugador, contrincante, habilidadContrincante, setPokemonEnUsoJugador, setHabilidadContrincante }) {
 
@@ -70,6 +70,10 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
             }
 
             insertarHistorial(jugador.nombre,up1,up2,up3,contrincante.nombre,rp1,rp2,rp3,'1',fecha,t)
+            obtenerPuntaje(jugador.nombre).then(res => {
+                actualizarPuntaje(jugador.nombre,20,res[0].puntaje)
+            })
+
             navigate("/menu-usuario")
 
         }else if (verificarSiGanoContrincante()) {
@@ -102,7 +106,9 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
             insertarHistorial(jugador.nombre,up1,up2,up3,contrincante.nombre,rp1,rp2,rp3,'0',fecha,t)
 
             navigate("/menu-usuario")
-
+            obtenerPuntaje(jugador.nombre).then(res => {
+                actualizarPuntaje(jugador.nombre,-20,res[0].puntaje)
+            })
         }
     }
 
@@ -121,7 +127,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         let numRandom = Math.floor(Math.random() * 9)
         const numeros = [1,2,3,4,5,6,7,8]
         const esAcertado = numeros.includes(numRandom)
-        let danioHecho = pokemonEnUsoJugador.fuerza * 1.3
+        let danioHecho =  Math.floor(pokemonEnUsoJugador.fuerza * 1.3)
         setMiHabilidad({"habilidad":'atacarImprobable',"danio":danioHecho,acerto:esAcertado})
     }
     const atacar = () => {

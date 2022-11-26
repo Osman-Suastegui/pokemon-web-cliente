@@ -83,7 +83,7 @@ function CombatirBot() {
         let numRandom = Math.floor(Math.random() * 9)
         const numeros = [1,2,3,4,5,6,7,8]
         const esAcertado = numeros.includes(numRandom)
-        let danioHecho = pokemonContrincante.fuerza * 1.3
+        let danioHecho = Math.floor(pokemonContrincante.fuerza * 1.3)
         setHabilidadContrincante({"habilidad":'atacarImprobable',"danio":danioHecho,acerto:esAcertado})
 
       }

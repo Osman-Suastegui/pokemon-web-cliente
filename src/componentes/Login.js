@@ -49,7 +49,7 @@ function Login() {
     const response = await iniciarSesion(Login)
     const user = await response.json()
 
-    if (user.loggedIn) {
+    if (user.loggedIn === true) {
       localStorage.setItem("nombreUsuario", user.usuario)
       localStorage.setItem("loggedIn", "true")
       asignarEquipo()

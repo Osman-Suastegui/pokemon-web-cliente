@@ -1,3 +1,5 @@
+
+import {URL_API} from '../api/pokemon.api.js'
 class Entrenador{
 
     constructor(nombre, equipo,puntuacion){
@@ -22,11 +24,12 @@ class Entrenador{
         return this.equipo;
     }
 
-    getPuntuacion(){ //MOSTRAR EN EL RANKING
-        return this.puntuacion;
+     obtenerPuntacion(){ 
+    
     }
 
     setPuntuacion(puntuacion){
+
         this.puntuacion = puntuacion;
     }
 

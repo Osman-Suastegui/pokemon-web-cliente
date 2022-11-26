@@ -1,10 +1,19 @@
 
+.historial-partida-usuario,.historial-partida-contrincante{
+    padding-left: 15px;
+
+}
+
 .historial-partida{
     margin: 5px;
     border-color: rgb(0, 0, 0);
-    border-width:  3px ; 
-    border-style: solid;
+    /* border-width:  6px ;  */
+    /* border-style: solid; */
+    background-color: rgba(6, 235, 109, 0.5);
     
+}
+.historial-partida-info{
+    margin-top: 10px;
 }
 .historial-partida > section {
     border-width: 1px;

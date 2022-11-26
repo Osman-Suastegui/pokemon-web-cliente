@@ -1,11 +1,12 @@
 
 import { useState, useEffect } from 'react'
-import { obtenerHistorial } from '../api/pokemon.api.js'
+import { obtenerHistorial,obtenerPuntaje } from '../api/pokemon.api.js'
 import HistorialPartida from './HistorialPartida.js'
 import "../css/Perfil.css"
 
 function Perfil() {
     const [entrenador, setEntrenador] = useState(JSON.parse(localStorage.getItem("entrenador")))
+    const [puntaje,setPuntaje] = useState()
     const [historial, setHistorial] = useState([])
     const [cantidadVictorias,setCantidadVictorias] = useState(0)
     const [cantidaDerrotas,setCantidadDerrotas] = useState(0)
@@ -23,17 +24,20 @@ function Perfil() {
             setCantidadDerrotas(derrotas)
             setCantidadVictorias(victorias)
         }
+        obtenerPuntaje(entrenador.nombre).then(res => {
+            setPuntaje(res[0].puntaje)
+        })
         obtHistorial()
     }, [])
     return (
         <div className='perfil'>
             <section className='datos-perfil'>
                 <h1>{entrenador.nombre}</h1>
-                <h4>{entrenador.puntuacion} ₧</h4>
+                <h4>puntaje: {puntaje} </h4>
                 <div>
                     <h4>Total de partidas jugadas: {cantidaDerrotas + cantidadVictorias}</h4>
                     <h4>Cantidad de victorias {cantidadVictorias}</h4>
-                    <h4>Porcentaje de Victorias: {(cantidaDerrotas + cantidadVictorias)/cantidadVictorias *100} %</h4>
+                    <h4>Porcentaje de Victorias: {Math.floor(cantidadVictorias /(cantidaDerrotas + cantidadVictorias) *100)} %</h4>
                     <h4>Cantidad de derrotas {cantidaDerrotas}</h4>
                 </div>
             </section>
