@@ -11,6 +11,7 @@ function BatallaMulti({sala,socket}) {
     const [pokemonContrincante, setPokemonContrincante] = useState(null)
     const [habilidadContrincante,setHabilidadContrincante] = useState(null)
     const [miHabilidad, setMiHabilidad] = useState(null)
+    const [personaMasRapida,setpersonaMasRapida] = useState(null)
 
     useEffect(()=>{
         if(miHabilidad != undefined){
@@ -22,6 +23,24 @@ function BatallaMulti({sala,socket}) {
     
         }
     },[pokemonEnUsoJugador])
+
+    useEffect( ()=> {
+        if(miHabilidad != null && habilidadContrincante != null && pokemonContrincante.tipo === pokemonEnUsoJugador.tipo){
+
+            let mensaje = {
+                "nombre1":entrenador.nombre,
+                "nombre2":contrincante.nombre,
+                "sala":sala
+            }
+            socket.emit("enviarProbabilidad",mensaje)
+            
+          }
+    },[miHabilidad,pokemonContrincante])
+
+    socket.on("recibirProbablidad",(nombre)=>{
+        console.log("nombre ",nombre)
+        setpersonaMasRapida(nombre)
+    })
 
     socket.on("recibirCambioPokemon",poke => {
         if(poke.entrenador !== entrenador.nombre){
@@ -81,6 +100,8 @@ function BatallaMulti({sala,socket}) {
                         habilidadContrincante={habilidadContrincante} 
                         setPokemonEnUsoJugador={setPokemonEnUsoJugador} 
                         setHabilidadContrincante={setHabilidadContrincante}
+                    personaMasRapida={personaMasRapida}
+                    setpersonaMasRapida={setpersonaMasRapida}
                     />)
             }
             <Chat sala={sala} socket={socket}/>

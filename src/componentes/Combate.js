@@ -4,10 +4,10 @@ import MiEquipo from './MiEquipo.js';
 
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useFetcher, useNavigate } from 'react-router-dom';
 import {insertarHistorial,obtenerPuntaje,actualizarPuntaje} from '../api/pokemon.api.js'
 
-function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrincante, setJugador, pokemonContrincante, pokemonEnUsoJugador, jugador, contrincante, habilidadContrincante, setPokemonEnUsoJugador, setHabilidadContrincante }) {
+function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrincante, setJugador, pokemonContrincante, pokemonEnUsoJugador, jugador, contrincante, habilidadContrincante, setPokemonEnUsoJugador, setHabilidadContrincante,personaMasRapida,setpersonaMasRapida}) {
 
     const [btnBloqueado, setBtnBloqueado] = useState(false)
     const [btnHabilidadas,setBtnHabilidades] = useState(false)
@@ -135,6 +135,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
             ...poke,
             vida: poke.vida - pokemonEnUsoJugador.fuerza
         }))
+        return pokemonEnUsoJugador.fuerza
     }
     const atacarImprobable = () => {
             if(miHabilidad.acerto){
@@ -142,7 +143,9 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                     ...poke,
                     vida: poke.vida - miHabilidad.danio
                 }))
+                return miHabilidad.danio
             }
+            return 0
         }
    
     const curar = (pokemoEnUso,setPokemon,entrenador) => {
@@ -153,13 +156,14 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
     }
 
     const usuarioAtacaContrincanteAtaca = () => {
-        console.table(habilidadContrincante)
          // ataca usuario
-         if (miHabilidad.habilidad ===  "atacar") atacar()
-         if (miHabilidad.habilidad === "atacarImprobable") atacarImprobable()
+         let danioRealizado = 0
+         if (miHabilidad.habilidad ===  "atacar") danioRealizado =  atacar()
+         if (miHabilidad.habilidad === "atacarImprobable") danioRealizado = atacarImprobable()
          if(miHabilidad.habilidad === "curar") curar(pokemonEnUsoJugador,setPokemonEnUsoJugador,'usuario')
          
-         if (pokemonContrincante.vida - pokemonEnUsoJugador.fuerza <= 0) {
+         
+         if (pokemonContrincante.vida - danioRealizado <= 0) {
              setBtnBloqueado(false)
              return
          }
@@ -193,12 +197,14 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
     }
 
     const contrincanteAtacaUsuarioAtaca = () => {
+        let danioRealizado = 0
         sleep(2000).then(() => {
             if (habilidadContrincante.habilidad === "atacar") {
                 setPokemonEnUsoJugador(poke => ({
                     ...poke,
                     vida: poke.vida - pokemonContrincante.fuerza
                 }))
+                danioRealizado = habilidadContrincante.danio
                 
             }
 
@@ -208,15 +214,20 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                         ...poke,
                         vida: poke.vida - habilidadContrincante.danio
                     }))
+                    danioRealizado = habilidadContrincante.danio
+
                 }
             }
             if(habilidadContrincante.habilidad === "curar") curar(pokemonContrincante,setPokemonContrincante,'contrincante')
 
             sleep(1000).then(() => {
-                if(pokemonEnUsoJugador.vida <= 0){
+
+                if(pokemonEnUsoJugador.vida - danioRealizado <= 0){
                     setBtnBloqueado(false)
+                    console.log("entro por aca 218")
                     return  
                 }
+                console.log("vida " ,pokemonEnUsoJugador.vida)
                 if (miHabilidad.habilidad === "atacar") atacar()
                 if (miHabilidad.habilidad ===  "atacarImprobable") atacarImprobable()
                 if(miHabilidad.habilidad === "curar") curar(pokemonEnUsoJugador,setPokemonEnUsoJugador,'usuario')
@@ -226,33 +237,47 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
 
         })
     }
-    const lanzarAtaques = () => {  //Arreglar atomicidad ataque
+    const lanzarAtaques = () => {  
         setBtnBloqueado(true)
 
         if (pokemonEnUsoJugador.velocidad > pokemonContrincante.velocidad) {
             usuarioAtacaContrincanteAtaca()
            
-        } else if (pokemonContrincante.velocidad > pokemonEnUsoJugador.velocidad) {
+        } 
+        if (pokemonContrincante.velocidad > pokemonEnUsoJugador.velocidad) {
            contrincanteAtacaUsuarioAtaca()
-        }else{
-            let probabilidad = Math.random()
-            if( probabilidad <= 0.5){
-                usuarioAtacaContrincanteAtaca()
-            }else{
-                contrincanteAtacaUsuarioAtaca()
-            }
         }
+        
     }
 
     useEffect(() => {
-
-        if (miHabilidad != null && habilidadContrincante != null) {
+        if (miHabilidad != null && habilidadContrincante != null && pokemonEnUsoJugador.tipo !== pokemonContrincante.tipo ) {
             lanzarAtaques()
             setMiHabilidad(null)
             setHabilidadContrincante(null)
-
+            console.log("if 1")
         }
-    }, [miHabilidad, habilidadContrincante])
+
+        if(personaMasRapida != null && miHabilidad != null && habilidadContrincante != null){
+            if(personaMasRapida === jugador.nombre){
+                console.log("usuarioAtacaContrincanteAtaca")
+                usuarioAtacaContrincanteAtaca()
+            }else{
+                console.log("contrincanteAtacaUsuarioAtaca")
+                contrincanteAtacaUsuarioAtaca()
+            }
+            console.log("if 2")
+            setpersonaMasRapida(null)
+            setMiHabilidad(null)
+            setHabilidadContrincante(null)
+        }
+
+    }, [miHabilidad, habilidadContrincante,personaMasRapida])
+
+    useEffect(()=>{
+       
+
+    },[personaMasRapida,miHabilidad,habilidadContrincante])
     useEffect(()=>{
         verificarGanador()
     },[contrincante,jugador])

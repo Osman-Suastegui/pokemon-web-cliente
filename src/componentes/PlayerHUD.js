@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
 
 function InfoPoke( {miPoke,nombre} ) {
-    console.log(miPoke)
    
     return (
         <div className="contenedorInfo">

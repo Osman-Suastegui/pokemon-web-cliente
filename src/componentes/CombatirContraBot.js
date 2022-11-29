@@ -14,6 +14,8 @@ function CombatirBot() {
   const [habilidadContrincante,setHabilidadContrincante] = useState({"habilidad":"atacar"})
   const [miHabilidad, setMiHabilidad] = useState(null)
   const [indexBot,setIndexBot] = useState(0)
+  const [probabilidad,setProbabilidad] = useState(0)
+  const [personaMasRapida,setpersonaMasRapida] = useState("")
 
   const obtenerEquipoBot = async () => {
     await fetch(URL_API + "/obtenerPokemones")
@@ -67,6 +69,16 @@ function CombatirBot() {
   },[indexBot])
 
   useEffect(()=>{
+    if(miHabilidad != null && habilidadContrincante != null && pokemonContrincante.tipo === pokemonEnUsoJugador.tipo){
+      if(Math.random() <= 0.5){
+        setpersonaMasRapida(entrenador.nombre)
+      }else{
+        setpersonaMasRapida("Bot")
+      }
+    }
+  },[miHabilidad,habilidadContrincante])
+
+  useEffect(()=>{
     if(habilidadContrincante == null){
       const habilidades = ["atacar","curar","atacarImprobable"]
       const randomHabilidad = Math.floor(Math.random() * habilidades.length)
@@ -94,7 +106,7 @@ function CombatirBot() {
   return (
     <div className='Contenedor-Principal'>
       {
-        (bot == null ) ? (<h1>cargando...</h1>) : (<Combate miHabilidad={miHabilidad} setMiHabilidad={setMiHabilidad} jugador={entrenador} setJugador={setEntrenador} contrincante={bot} setContrincante={setBot} pokemonEnUsoJugador={pokemonEnUsoJugador} pokemonContrincante={pokemonContrincante} setPokemonContrincante={setPokemonContrincante} habilidadContrincante={habilidadContrincante || null} setPokemonEnUsoJugador={setPokemonEnUsoJugador} setHabilidadContrincante={setHabilidadContrincante}/>)
+        (bot == null ) ? (<h1>cargando...</h1>) : (<Combate miHabilidad={miHabilidad} setMiHabilidad={setMiHabilidad} jugador={entrenador} setJugador={setEntrenador} contrincante={bot} setContrincante={setBot} pokemonEnUsoJugador={pokemonEnUsoJugador} pokemonContrincante={pokemonContrincante} setPokemonContrincante={setPokemonContrincante} habilidadContrincante={habilidadContrincante || null} setPokemonEnUsoJugador={setPokemonEnUsoJugador} setHabilidadContrincante={setHabilidadContrincante} personaMasRapida={personaMasRapida}/>)
 
       }
     </div>
