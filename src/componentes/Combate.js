@@ -1,19 +1,21 @@
 import '../css/Combate.css';
 import InfoPoke from './PlayerHUD.js'; //CUADRO GRIS CON DATOS DE LOS JUGADORES
 import MiEquipo from './MiEquipo.js';
-// import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useFetcher, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {insertarHistorial,obtenerPuntaje,actualizarPuntaje} from '../api/pokemon.api.js'
 
 function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrincante, setJugador, pokemonContrincante, pokemonEnUsoJugador, jugador, contrincante, habilidadContrincante, setPokemonEnUsoJugador, setHabilidadContrincante,personaMasRapida,setpersonaMasRapida}) {
-
+    
+    
     const [btnBloqueado, setBtnBloqueado] = useState(false)
     const [btnHabilidadas,setBtnHabilidades] = useState(false)
     const [tiempoIniciado,setTiempoIniciado] = useState(new Date().getTime())
-    // const [notify,setNotify] = useState()
     const navigate = useNavigate()
    
     function sleep(ms) {
@@ -115,6 +117,9 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
     }
 
     const elegirAtacar = () => {
+        // toast.success('Success Notification !', {
+        //     position: toast.POSITION.TOP_RIGHT
+        // });
         setBtnBloqueado(true)
         setMiHabilidad({"habilidad":'atacar',"danio":pokemonEnUsoJugador.fuerza,"curar":0})
     }
@@ -133,6 +138,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         setMiHabilidad({"habilidad":'atacarImprobable',"danio":danioHecho,acerto:esAcertado})
     }
     const atacar = () => {
+        
         setPokemonContrincante(poke => ({
             ...poke,
             vida: poke.vida - pokemonEnUsoJugador.fuerza
@@ -140,17 +146,35 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         return pokemonEnUsoJugador.fuerza
     }
     const atacarImprobable = () => {
+            
             if(miHabilidad.acerto){
+                toast.success("Tu ataque improbable acerto e hizo " + miHabilidad.danio,{
+                    position: toast.POSITION.TOP_RIGHT
+                })                
                 setPokemonContrincante(poke => ({
                     ...poke,
                     vida: poke.vida - miHabilidad.danio
                 }))
                 return miHabilidad.danio
+            }else{
+                toast.info("Tu ataque improbable fallo",{
+                    position: toast.POSITION.TOP_RIGHT
+                }) 
             }
             return 0
         }
    
     const curar = (pokemoEnUso,setPokemon,entrenador) => {
+        if(entrenador === 'usuario'){
+
+            toast.success('El monstruo del ' + jugador.nombre + " se ha curado " + miHabilidad.curar,{
+                position: toast.POSITION.TOP_RIGHT
+            })
+        }else{
+            toast.success('El monstruo del ' + contrincante.nombre + " se ha curado " + habilidadContrincante.curar,{
+                position: toast.POSITION.TOP_RIGHT
+            })
+        }
         setPokemon(poke => ({
             ...poke,
             vida :(poke.vida + (entrenador === 'usuario' ?  miHabilidad.curar : habilidadContrincante.curar)) > poke.vidaTotal ? poke.vidaTotal : poke.vida + (entrenador === 'usuario' ?  miHabilidad.curar : habilidadContrincante.curar)
@@ -171,6 +195,10 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
          }
          sleep(2000).then(() => {
              if (habilidadContrincante.habilidad === "atacar") {
+                toast.error('El rival ' + contrincante.nombre + " te ha atacado", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+            
                  setPokemonEnUsoJugador(poke => ({
                      ...poke,
                      vida: poke.vida - pokemonContrincante.fuerza
@@ -180,6 +208,20 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
              }
 
              if (habilidadContrincante.habilidad === "atacarImprobable") {
+                toast.info('Te lanzaron un ataque improbable ', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                if(habilidadContrincante.acerto) {
+                    toast.warning('El rival ' + contrincante.nombre + " acerto su ataque, te hizo " + habilidadContrincante.danio + " de daño" , {
+                        position: toast.POSITION.TOP_RIGHT
+        
+                    });
+                }else{
+                    toast.warning('El rival ' + contrincante.nombre + " faño su ataque" , {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                }
+
                  if (habilidadContrincante.acerto) {
                      setPokemonEnUsoJugador(poke => ({
                          ...poke,
@@ -201,6 +243,9 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         let danioRealizado = 0
         sleep(2000).then(() => {
             if (habilidadContrincante.habilidad === "atacar") {
+                toast.error('El rival ' + contrincante.nombre + " te ha atacado", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
                 setPokemonEnUsoJugador(poke => ({
                     ...poke,
                     vida: poke.vida - pokemonContrincante.fuerza
@@ -210,6 +255,21 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
             }
 
             if (habilidadContrincante.habilidad === "atacarImprobable") {
+
+                toast.info('Te lanzaron un ataque improbable ', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                if(habilidadContrincante.acerto) {
+                    toast.warning('El rival ' + contrincante.nombre + " acerto su ataque, te hizo " + habilidadContrincante.danio + " de daño" , {
+                        position: toast.POSITION.TOP_RIGHT
+        
+                    });
+                }else{
+                    toast.warning('El rival ' + contrincante.nombre + " faño su ataque" , {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                }
+
                 if (habilidadContrincante.acerto) {
                     setPokemonEnUsoJugador(poke => ({
                         ...poke,
@@ -237,12 +297,11 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         })
     }
     const lanzarAtaques = () => {  
-        // setNotify(toast("Wow so easy!"))
         setBtnBloqueado(true)
-
+        
         if (pokemonEnUsoJugador.velocidad > pokemonContrincante.velocidad) {
             usuarioAtacaContrincanteAtaca()
-           
+               
         } 
         if (pokemonContrincante.velocidad > pokemonEnUsoJugador.velocidad) {
            contrincanteAtacaUsuarioAtaca()
@@ -252,6 +311,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
 
     useEffect(() => {
         if (miHabilidad != null && habilidadContrincante != null && pokemonEnUsoJugador.tipo !== pokemonContrincante.tipo ) {
+           
             lanzarAtaques()
             setMiHabilidad(null)
             setHabilidadContrincante(null)
@@ -341,11 +401,12 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                    
                 </div>
                 <div className='Habilidades'>
-                    <button disabled={btnBloqueado ||  btnHabilidadas } name='atacar' onClick={elegirAtacar} className='Boton-Habilidad' alt="Ataque simple 100& accuracy"></button>
+
+                    <button  disabled={btnBloqueado ||  btnHabilidadas } name='atacar' onClick={elegirAtacar} className='Boton-Habilidad' alt="Ataque simple 100& accuracy"></button>
                     <button disabled={btnBloqueado || btnHabilidadas } name="atacarImprobable" onClick={elegirAtacarImprobable} className='Boton-Habilidad'></button>
                     <button onClick={elegirCurarse} disabled={btnBloqueado || btnHabilidadas } name='curar' className='Boton-Habilidad'></button>
                 </div>
-                {/* <ToastContainer onClick={notify}/> */}
+                <ToastContainer />
             </div>
     );
 }
