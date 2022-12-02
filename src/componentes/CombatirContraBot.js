@@ -106,7 +106,7 @@ function CombatirBot() {
   return (
     <div className='Contenedor-Principal'>
       {
-        (bot == null ) ? (<h1>cargando...</h1>) : (<Combate miHabilidad={miHabilidad} setMiHabilidad={setMiHabilidad} jugador={entrenador} setJugador={setEntrenador} contrincante={bot} setContrincante={setBot} pokemonEnUsoJugador={pokemonEnUsoJugador} pokemonContrincante={pokemonContrincante} setPokemonContrincante={setPokemonContrincante} habilidadContrincante={habilidadContrincante || null} setPokemonEnUsoJugador={setPokemonEnUsoJugador} setHabilidadContrincante={setHabilidadContrincante} personaMasRapida={personaMasRapida}/>)
+        (bot == null ) ? (<h1>cargando...</h1>) : (<Combate miHabilidad={miHabilidad} setMiHabilidad={setMiHabilidad} jugador={entrenador} setJugador={setEntrenador} contrincante={bot} setContrincante={setBot} pokemonEnUsoJugador={pokemonEnUsoJugador} pokemonContrincante={pokemonContrincante} setPokemonContrincante={setPokemonContrincante} habilidadContrincante={habilidadContrincante || null} setPokemonEnUsoJugador={setPokemonEnUsoJugador} setHabilidadContrincante={setHabilidadContrincante} personaMasRapida={personaMasRapida} setpersonaMasRapida={setpersonaMasRapida}/>)
 
       }
     </div>

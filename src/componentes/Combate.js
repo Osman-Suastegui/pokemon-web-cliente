@@ -1,6 +1,7 @@
 import '../css/Combate.css';
 import InfoPoke from './PlayerHUD.js'; //CUADRO GRIS CON DATOS DE LOS JUGADORES
 import MiEquipo from './MiEquipo.js';
+// import { ToastContainer, toast } from 'react-toastify';
 
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -12,6 +13,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
     const [btnBloqueado, setBtnBloqueado] = useState(false)
     const [btnHabilidadas,setBtnHabilidades] = useState(false)
     const [tiempoIniciado,setTiempoIniciado] = useState(new Date().getTime())
+    // const [notify,setNotify] = useState()
     const navigate = useNavigate()
    
     function sleep(ms) {
@@ -169,7 +171,6 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
          }
          sleep(2000).then(() => {
              if (habilidadContrincante.habilidad === "atacar") {
-                console.log("Aca entro ",pokemonContrincante.fuerza)
                  setPokemonEnUsoJugador(poke => ({
                      ...poke,
                      vida: poke.vida - pokemonContrincante.fuerza
@@ -224,10 +225,8 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
 
                 if(pokemonEnUsoJugador.vida - danioRealizado <= 0){
                     setBtnBloqueado(false)
-                    console.log("entro por aca 218")
                     return  
                 }
-                console.log("vida " ,pokemonEnUsoJugador.vida)
                 if (miHabilidad.habilidad === "atacar") atacar()
                 if (miHabilidad.habilidad ===  "atacarImprobable") atacarImprobable()
                 if(miHabilidad.habilidad === "curar") curar(pokemonEnUsoJugador,setPokemonEnUsoJugador,'usuario')
@@ -238,6 +237,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         })
     }
     const lanzarAtaques = () => {  
+        // setNotify(toast("Wow so easy!"))
         setBtnBloqueado(true)
 
         if (pokemonEnUsoJugador.velocidad > pokemonContrincante.velocidad) {
@@ -255,18 +255,14 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
             lanzarAtaques()
             setMiHabilidad(null)
             setHabilidadContrincante(null)
-            console.log("if 1")
         }
 
         if(personaMasRapida != null && miHabilidad != null && habilidadContrincante != null){
             if(personaMasRapida === jugador.nombre){
-                console.log("usuarioAtacaContrincanteAtaca")
                 usuarioAtacaContrincanteAtaca()
             }else{
-                console.log("contrincanteAtacaUsuarioAtaca")
                 contrincanteAtacaUsuarioAtaca()
             }
-            console.log("if 2")
             setpersonaMasRapida(null)
             setMiHabilidad(null)
             setHabilidadContrincante(null)
@@ -349,6 +345,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
                     <button disabled={btnBloqueado || btnHabilidadas } name="atacarImprobable" onClick={elegirAtacarImprobable} className='Boton-Habilidad'></button>
                     <button onClick={elegirCurarse} disabled={btnBloqueado || btnHabilidadas } name='curar' className='Boton-Habilidad'></button>
                 </div>
+                {/* <ToastContainer onClick={notify}/> */}
             </div>
     );
 }

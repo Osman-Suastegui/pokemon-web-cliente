@@ -38,6 +38,18 @@ class Pokemon{
     Defender(){
         return "Bloqueado";
     }
-    
+
+
+    build() {
+    return {
+      vida: this.vida,
+      nombre: this.nombre,
+      fuerza: this.fuerza,
+      velocidad: this.velocidad,
+      defensa: this.defensa,
+      img_frente:this.img_frente,
+      img_espaldas:this.img_espaldas
+        };
+    }
 }
 export default Pokemon;

@@ -15,7 +15,6 @@ function Login() {
     let nombre = localStorage.getItem("nombreUsuario")
     const response = await obtenerEquipo(nombre)
     let pokemones = await response.json()    
-    console.log("pkmeones " ,pokemones)
     let equipoEntrenador = []
     pokemones.map(pokemon => {
       equipoEntrenador.push(new Pokemon(
