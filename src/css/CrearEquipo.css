@@ -28,3 +28,8 @@
     font-weight: bold;
     cursor: pointer;
 }
+.guardar-pokemon{
+    height: 120px;
+    font-size: 14px;
+    font-weight: bold;
+}

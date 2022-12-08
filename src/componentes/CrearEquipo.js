@@ -101,7 +101,7 @@ function CrearEquipo() {
                     ))
                 }
             </select>
-            <button onClick={guardarPokemon}>guardar pokemon </button>
+            <button onClick={guardarPokemon} className='guardar-pokemon'>GUARDAR POKEMON </button>
             <section className="Contenedor-Pokemones">
                 <title>TU EQUIPO:</title>
                 {
