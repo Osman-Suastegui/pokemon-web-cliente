@@ -1,28 +1,22 @@
 .Contenedor-principal
 {   
     width: 100%;
-    height: 100%;
-    display: flex;
-    background-image: url(../img/IndexBackground.jfif);
-    background-repeat: no-repeat;
-    align-items: center;    
+    height: 100%;  
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 23px;
     text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.repetir-logo
-{   
-    background-image: url(../img/Logo.png);
-    background-repeat: repeat;
-    background-size: 20%;
-}
-
 
 .Titulo-Ranking{
     color: white; 
     animation: fuego 2s infinite , arcoiris 2s infinite, rotarDerecha 2s infinite;
     text-shadow: 0 0 5px #000;
+    /* centrado */
 }
 
 .marcotabla{
@@ -41,7 +35,6 @@
 }
 .styled-table 
 {   
-    position: center;
     height: 20%;
     background-color: rgba(233, 230, 230, 0.877);
     border-collapse: collapse; 
@@ -51,12 +44,13 @@
 }
 .styled-table thead tr 
 {   
-    background-color: #980081; 
+    background-color: #980033; 
     color: #ffffff; 
+    animation: fondoarcoiris 1.5s infinite;
 }
 .styled-table th, .styled-table td 
 { 
-    padding: 12px 15px; 
+    padding: 10px 10px; 
 }
 .styled-table tbody tr 
 { 
@@ -64,9 +58,28 @@
 } 
 .styled-table tbody tr:nth-of-type(even) 
 { 
-    background-color: #f3f3f3; 
+    background-color: #dbdbdb; 
 } 
 .styled-table tbody tr:last-of-type 
 { 
     border-bottom: 2px solid #009879; 
+}
+
+/* animacion background de colores */
+@keyframes fondoarcoiris {
+    0% {
+        background-color: #980033;
+    }
+    25% {
+        background-color: #ff0000;
+    }
+    50% {
+        background-color: #ffcc00;
+    }
+    75% {
+        background-color: #00cc00;
+    }
+    100% {
+        background-color: #0000ff;
+    }
 }
