@@ -9,6 +9,7 @@ function PokemonPres({ pokemon }) {
                 <h2>TIPO: {pokemon.tipo}</h2>
                 <h2>FUERZA: {pokemon.fuerza}</h2>
                 <h2>DEFENSA: {pokemon.defensa}</h2>
+                <h2>Velocidad: {pokemon.velocidad}</h2>
             </div>
         </div>
     )

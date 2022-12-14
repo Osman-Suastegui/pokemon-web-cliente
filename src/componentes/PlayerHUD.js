@@ -7,10 +7,11 @@ function InfoPoke( {miPoke,nombre} ) {
     return (
         <div className="contenedorInfo">
             <div className='InfoJugador'>
-                <h1>{miPoke?.nombre}</h1>
-                <span>Fuerza: {miPoke?.fuerza}  </span>
-                <span>Defensa: {miPoke?.defensa}</span>
-                <h3>PS: {miPoke?.vida }</h3> 
+                <h3>{miPoke?.nombre}</h3>
+                <h5>Fuerza: {miPoke?.fuerza}  </h5>
+                <h5>Defensa: {miPoke?.defensa} </h5>
+                <h5>Velocidad: {miPoke?.velocidad}</h5>
+                <h4>PS: {miPoke?.vida }</h4> 
                 <div className="BordeVida"><div className="BarraVida" style={{width: `${miPoke?.vida / miPoke?.vidaTotal * 100}%`}}></div> </div>   
             </div>
             <div className='img'>

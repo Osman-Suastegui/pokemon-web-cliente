@@ -1,12 +1,16 @@
 .InfoJugador {
     background-color: rgba(0,0,0,0.3);
     width: 250px;
-    height: 150px;
+    height: 160px;
     font-family: Arial;
     color: #fff;
     text-shadow: 0 0 5px #000;
     box-shadow: 0 0 5px #000;
     text-align: center;
+}
+.InfoJugador h5,h4{
+    line-height: 0px;
+    
 }
 
 .img{
