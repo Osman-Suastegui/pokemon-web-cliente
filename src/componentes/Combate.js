@@ -217,7 +217,7 @@ function Combate({miHabilidad, setMiHabilidad,setContrincante, setPokemonContrin
         
                     });
                 }else{
-                    toast.warning('El rival ' + contrincante.nombre + " faño su ataque" , {
+                    toast.warning('El rival ' + contrincante.nombre + " fallo su ataque" , {
                         position: toast.POSITION.TOP_RIGHT
                     });
                 }
