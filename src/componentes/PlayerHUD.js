@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
 
 function InfoPoke( {miPoke,nombre} ) {
-   
     return (
         <div className="contenedorInfo">
             <div className='InfoJugador'>
                 <h1>{miPoke?.nombre}</h1>
+                <span>Fuerza: {miPoke?.fuerza}  </span>
+                <span>Defensa: {miPoke?.defensa}</span>
                 <h3>PS: {miPoke?.vida }</h3> 
                 <div className="BordeVida"><div className="BarraVida" style={{width: `${miPoke?.vida / miPoke?.vidaTotal * 100}%`}}></div> </div>   
             </div>
